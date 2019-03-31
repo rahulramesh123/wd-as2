@@ -271,7 +271,7 @@ aside ul {list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom:
 	animation: enemyfireright 1s ease-in forwards;
 }
 
-.enemy..fire .weapon.bow, .enemy.stand.down.fire .weapon.bow {
+.enemy.fire .weapon.bow, .enemy.stand.down.fire .weapon.bow {
 	top: 12px;
 	left: 6px;
 	z-index: 2;
