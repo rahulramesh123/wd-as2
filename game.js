@@ -129,8 +129,8 @@ function moveArrow(arrow) {
   //All 4 corners of the arrow are required to check there is no collision on any side
   var arrowTopLeft = document.elementFromPoint(left, top);
   var arrowTopRight = document.elementFromPoint(left + 32, top);
-  var arrowBottomLeft = document.elementFromPoint(left, top + 48);
-  var arrowBottomRight = document.elementFromPoint(left + 32, top + 48);
+  var arrowBottomLeft = document.elementFromPoint(left, top + 10);
+  var arrowBottomRight = document.elementFromPoint(left + 32, top + 10);
 
   //went out of map
   if (
@@ -140,6 +140,20 @@ function moveArrow(arrow) {
     !arrowBottomRight
   ) {
     playerArrows.removeChild(arrow);
+    return;
+  }
+
+  if (arrowTopLeft && arrowTopLeft.classList.contains("enemy")) {
+    hitEnemy(arrow, arrowTopLeft);
+    return;
+  } else if (arrowTopRight && arrowTopRight.classList.contains("enemy")) {
+    hitEnemy(arrow, arrowTopRight);
+    return;
+  } else if (arrowBottomLeft && arrowBottomLeft.classList.contains("enemy")) {
+    hitEnemy(arrow, arrowBottomLeft);
+    return;
+  } else if (arrowBottomRight && arrowBottomRight.classList.contains("enemy")) {
+    hitEnemy(arrow, arrowBottomRight);
     return;
   }
 
@@ -154,6 +168,18 @@ function moveArrow(arrow) {
   ) {
     arrow.style.left = left + "px";
     arrow.style.top = top + "px";
+  }
+}
+
+function hitEnemy(arrow, enemy) {
+  playerArrows.removeChild(arrow);
+  enemy.classList.add("dead");
+  setTimeout(removeEnemy, 3000, enemy);
+}
+
+function removeEnemy(enemy) {
+  if (enemy && document.body.contains(enemy)) {
+    document.body.removeChild(enemy);
   }
 }
 
