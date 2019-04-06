@@ -180,7 +180,15 @@ function hitEnemy(arrow, enemy) {
 function removeEnemy(enemy) {
   if (enemy && document.body.contains(enemy)) {
     document.body.removeChild(enemy);
+    onAllEnemiesHit();
   }
+}
+
+function onAllEnemiesHit() {
+  var enemies = document.querySelectorAll('.enemy');
+  if(enemies.length === 0) {
+    alert('You win!');
+  }  
 }
 
 function createArrow(dir, left, top) {
@@ -230,7 +238,8 @@ function keyDown(event) {
 
 function gameStart() {
   player = document.getElementById("player");
-  playerArrows = document.getElementById("playerArrows");
+  playerArrows = document.createElement('div');
+  document.body.appendChild(playerArrows);
   setInterval(move, 10);
   document.addEventListener("keydown", keyDown);
   document.addEventListener("keyup", keyUp);
