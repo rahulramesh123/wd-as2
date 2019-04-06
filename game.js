@@ -84,16 +84,17 @@ function move() {
     player.style.top = top + "px";
   }
 
-  //If any of the keys are being pressed, display the walk animation
-  if (leftPressed || rightPressed || upPressed || downPressed) {
-    player.classList.add("walk");
-    player.classList.remove("stand");
-  } else if (spaceBarPressed) {
+  if (spaceBarPressed) {
     spaceBarPressed = false;
     player.classList.add("fire");
     var arrow = createArrow(playerDirection, left, top);
     playerArrows.appendChild(arrow);
   }
+  //If any of the keys are being pressed, display the walk animation
+  else if (leftPressed || rightPressed || upPressed || downPressed) {
+    player.classList.add("walk");
+    player.classList.remove("stand");
+  } 
   //Otherwise, no keys are being pressed, display stand
   else {
     player.classList.add("stand");
@@ -188,7 +189,14 @@ function onAllEnemiesHit() {
   var enemies = document.querySelectorAll('.enemy');
   if(enemies.length === 0) {
     alert('You win!');
+    playAgain(); 
   }  
+}
+
+function playAgain() {
+  if (confirm("Play again?")) {
+    window.location.reload();
+  }
 }
 
 function createArrow(dir, left, top) {
